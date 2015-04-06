@@ -1,0 +1,20 @@
+Coding in C++ or Java, OpenGL
+
+Interaction of object with environment--cells that detect scene (big) and objects (small) in the same area of the brain
+
+High-energy vs low energy states: table balanced on leg vs table resting on all 4
+
+--me: how do I model "high energy states" within the scene
+
+--hypothesis: some neural reaction to high energy States vs low energy States (question: where do we expect to see the neural reaction? Automate process of finding neurons reacting to the pose?"
+
+LWJGL
+Splines
+NURB curves
+OpenGL chapters:
+Viewing chapter3
+siavash@jhu.edu
+
+Start as cube, not sphere, to ensure it has stable positions. Then add projections. Potentially use PCA to find axis along projections, to determine high energy orientation?
+Why abstract art cube resting on corner is considered more evocative than cube in stable position
+

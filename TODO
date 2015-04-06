@@ -1,0 +1,67 @@
+GOAL:
+write software that quickly produces randomly generated images (stimuli) of objects in "low-energy", or physically stable, states. help design/perform test that measures neural responses to these stimuli.
+
+we only care about low-energy states, since those are the states that we see in real life. helps in creating stimuli with object actually "in" environment.
+
+
+
+
+-- draw plane
+	++ light it
+	++ texture it
+-- define NURBS surface, ***convert to vertices***, draw vertices.
+-- use Bullet physics engine
+	++ learn how it represents rigid bodies (vertices? can we use raw NURBS surfaces?)
+	++ make a simple cube and plane collide.
+-- draw object in 4 states: [stable, isolated], [unstable, isolated], [stable, with landscape], [unstable, with landscape]. Measure differences in response.
+	++ find a way to quantify the "stability" of a certain pose/stimulus.
+	++ 
+
+
+
+Stuff to learn about:
+-- JNI (getting C++ OpenGL and Java OpenGL to work together)
+-- 
+
+Look into using Blender for rendering stuff
+	-- can easily convert from NURBS to mesh (Alt-C)
+		bpy.ops.object.convert(target='MESH')
+	-- how to automatically run physics sim and save orientation?
+	-- how to handle collisions in physics sim
+
+
+generate NURBS sphere
+	bpy.ops.surface.primitive_nurbs_surface_sphere_add()
+convert to mesh
+	bpy.ops.object.convert(target='MESH')
+set origin to center of mass
+	bpy.ops.origin_set(type='ORIGIN_CENTER_OF_MASS')
+set physics properties
+    BLENDER GAME:
+	bpy.data.objects["SurfSphere.004"].game.physics_type = 'RIGID_BODY'
+	bpy.data.objects["SurfSphere.004"].game.use_collision_bounds = True
+	bpy.data.objects["SurfSphere.004"].game.collision_bounds_type = 'TRIANGLE_MESH'
+    BLENDER RENDER:
+	bpy.ops.rigidbody.object_add()
+	bpy.data.objects["SurfSphere.004"].rigid_body.collision_shape = 'MESH'
+	// switch to plane, do the same thing
+	// turn off 'dynamic' for plane
+set length of simulation
+	// set scene length
+	bpy.data.scenes['Scene'].frame_end = 120 // 5 seconds
+	// set sim length to scene length
+	bpy.context.scene.rigidbody_world.point_cache.frame_end = bpy.data.scenes['Scene'].frame_end
+run simulation to get position after "5 seconds"
+	// bake simulation/build cache
+	bpy.ops.ptcache.bake_all(bake=True)
+	// bake to keyframes (optional)
+	bpy.ops.rigidbody.bake_to_keyframes()
+	// switch to last frame
+	bpy.ops.screen.frame_jump(end=True) *OR* bpy.data.scenes['Scene'].frame_end = 120 = bpy.data.scenes['Scene'].frame_end
+render that, save it to directory
+	bpy.context.scene.render.filepath = "/home/r1_matt/Desktop/Blender/render/{}.png".format(name)
+    	bpy.ops.render.render(write_still=True, use_viewport=True)
+
+
+
+

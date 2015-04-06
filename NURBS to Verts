@@ -1,0 +1,20 @@
+manifolds.
+
+tesselation.
+
+trimmed NURBS
+
+control points --> NURBS -----------------------*--> renderer
+	       | (tesselator)			^
+	       --> vertices --> stable position |
+
+
+control points --> NURBS --> vertices --> physics engine --> renderer
+
+
+EXT_nurbs_tesselator
+
+
+SEE BOOKMARKS FOLDER 'NURBS TO VERTS'
+
+gluNurbsProperty();
